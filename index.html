@@ -1,79 +1,539 @@
-<!-- PORTADA / LOGO (Úsalo en tu header o hero) -->
-<img src="imagenesportada-logo.webp.jpg" alt="Servicio Eléctrico Santander">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicio Eléctrico Santander | El Gordo Eléctrico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0f13;
+      --bg-card: #121820;
+      --accent-green: #b4ff39;
+      --accent-red: #e62e2d;
+      --text-main: #ffffff;
+      --text-muted: #9aa5b1;
+      --border-color: #1f2933;
+    }
 
-<!-- SECCIÓN DE SERVICIOS -->
-<section class="servicios">
-  <div class="grid-servicios">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-    <!-- 1. Diagnóstico eléctrico -->
-    <div class="card">
-      <img src="imagenesdiagnostico.webp.png" alt="Diagnóstico eléctrico automotriz">
-      <div class="card-body">
-        <h3>DIAGNÓSTICO ELÉCTRICO</h3>
-        <p>Identificamos fallas eléctricas y electrónicas para encontrar soluciones adecuadas para tu vehículo.</p>
-        <a href="#contacto" class="btn-servicio">SOLICITAR SERVICIO →</a>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* NAVEGACIÓN */
+    header {
+      background-color: rgba(11, 15, 19, 0.95);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .brand {
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .brand span {
+      color: var(--accent-green);
+    }
+
+    nav a {
+      color: var(--text-main);
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent-green);
+    }
+
+    /* PORTADA / HERO CON TU LOGO */
+    .hero {
+      padding: 50px 5% 70px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(180, 255, 57, 0.12);
+      color: var(--accent-green);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 6px 14px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.15;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: var(--accent-green);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-green);
+      color: #0b0f13;
+      padding: 14px 26px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      padding: 14px 26px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.3s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-green);
+    }
+
+    .hero-image-box {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      background-color: var(--bg-card);
+    }
+
+    .hero-image-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* SECCIÓN CONÓCENOS */
+    .about {
+      background-color: #0e1318;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 70px 5%;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      color: var(--accent-green);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title span {
+      color: var(--accent-green);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 25px;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 0.98rem;
+    }
+
+    .about-text strong {
+      color: var(--text-main);
+    }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .highlight-item {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .highlight-item span {
+      color: var(--accent-green);
+      margin-right: 6px;
+    }
+
+    .about-photo {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* SECCIÓN SERVICIOS */
+    .services {
+      padding: 80px 5%;
+    }
+
+    .services-subtitle {
+      color: var(--text-muted);
+      max-width: 650px;
+      margin-bottom: 45px;
+      font-size: 0.95rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-green);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background-color: #182029;
+    }
+
+    .card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-body h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .card-body p {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-bottom: 22px;
+      flex-grow: 1;
+    }
+
+    .card-link {
+      color: var(--accent-green);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-link:hover {
+      text-decoration: underline;
+    }
+
+    /* CONTACTO Y FOOTER */
+    .cta-banner {
+      background: linear-gradient(135deg, #141c24 0%, #0b0f13 100%);
+      border-top: 1px solid var(--border-color);
+      padding: 65px 5%;
+      text-align: center;
+    }
+
+    .cta-banner h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .cta-banner p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 28px;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 25px 5%;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 850px) {
+      .hero, .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .about-highlights {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR -->
+  <header>
+    <div class="brand">SERVICIO ELÉCTRICO <span>SANTANDER</span></div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#conocenos">Conócenos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- PORTADA CON TU LOGO EXACTO -->
+  <section id="inicio" class="hero">
+    <div>
+      <span class="hero-badge">⚡ Taller Automotriz Especializado</span>
+      <h1>SOLUCIONES EN <span>ELECTRICIDAD</span> Y SONIDO AUTOMOTRIZ</h1>
+      <p>
+        En <strong>Servicio Eléctrico Santander</strong>, bajo el liderazgo del reconocido <strong>Gordo Eléctrico</strong>, garantizamos diagnósticos certeros, mantenimiento confiable e instalación profesional para tu vehículo.
+      </p>
+      <div class="hero-buttons">
+        <a href="#servicios" class="btn-primary">Ver Servicios</a>
+        <a href="#contacto" class="btn-secondary">Agendar Revisión</a>
       </div>
     </div>
 
-    <!-- 2. Alternadores (usa imagen de sistema eléctrico o una URL externa si aún no la subes) -->
-    <div class="card">
-      <img src="imagenessistema-electrico.webp.png" alt="Alternadores">
-      <div class="card-body">
-        <h3>ALTERNADORES</h3>
-        <p>Revisión, mantenimiento y reparación de alternadores para garantizar una correcta carga de batería.</p>
-        <a href="#contacto" class="btn-servicio">SOLICITAR SERVICIO →</a>
+    <div class="hero-image-box">
+      <!-- TU LOGO DE PORTADA SUBIDO EN GITHUB -->
+      <img src="./imagenesportada-logo.webp.jpg" alt="Logo Servicio Eléctrico Santander">
+    </div>
+  </section>
+
+  <!-- SECCIÓN CONÓCENOS -->
+  <section id="conocenos" class="about">
+    <div class="container">
+      <span class="section-tag">Quiénes somos</span>
+      <h2 class="section-title">CONOCE <span>SERVICIO ELÉCTRICO SANTANDER</span></h2>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Al frente de nuestro taller está el reconocido <strong>Gordo Eléctrico</strong>, un referente de experiencia, confianza y buen trato cuando se trata de resolver fallas eléctricas con precisión.
+          </p>
+          <p>
+            Somos especialistas en electricidad automotriz comprometidos con el rendimiento, la seguridad y el confort de tu vehículo. Combinamos responsabilidad, dedicación y atención personalizada para ofrecer diagnósticos acertados y soluciones duraderas en sistemas eléctricos, electrónicos y de sonido.
+          </p>
+
+          <div class="about-highlights">
+            <div class="highlight-item"><span>⚡</span> Diagnóstico eléctrico automotriz</div>
+            <div class="highlight-item"><span>🔧</span> Reparación y mantenimiento</div>
+            <div class="highlight-item"><span>🔊</span> Instalación de accesorios y sonidos</div>
+            <div class="highlight-item"><span>🤝</span> Atención responsable y personalizada</div>
+          </div>
+        </div>
+
+        <div class="about-photo">
+          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=900&q=80" alt="Taller de electricidad automotriz">
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- 3. Motores de arranque (usa imagen de diagnóstico o una URL externa si aún no la subes) -->
-    <div class="card">
-      <img src="imagenesdiagnostico.webp.png" alt="Motores de arranque">
-      <div class="card-body">
-        <h3>MOTORES DE ARRANQUE</h3>
-        <p>Diagnóstico y reparación del sistema de arranque para que tu vehículo encienda correctamente.</p>
-        <a href="#contacto" class="btn-servicio">SOLICITAR SERVICIO →</a>
+  <!-- SECCIÓN NUESTROS SERVICIOS -->
+  <section id="servicios" class="services">
+    <div class="container">
+      <span class="section-tag">Lo que hacemos</span>
+      <h2 class="section-title">NUESTROS <span>SERVICIOS</span></h2>
+      <p class="services-subtitle">
+        Soluciones integrales para mantener el sistema eléctrico de tu vehículo en óptimas condiciones y personalizarlo con los mejores accesorios.
+      </p>
+
+      <div class="services-grid">
+
+        <!-- 1. Instalación de sonidos -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80" alt="Instalación de sonidos">
+          <div class="card-body">
+            <h3>INSTALACIÓN DE SONIDOS</h3>
+            <p>Instalación y conexión profesional de radios, pantallas, parlantes, amplificadores, bajos y sistemas de sonido para vehículos.</p>
+            <a href="#contacto" class="card-link">SOLICITAR SERVICIO →</a>
+          </div>
+        </div>
+
+        <!-- 2. Luces automotrices -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80" alt="Luces automotrices">
+          <div class="card-body">
+            <h3>LUCES AUTOMOTRICES</h3>
+            <p>Instalación y revisión de luces LED, faros, exploradoras, luces interiores y sistemas completos de iluminación vehicular.</p>
+            <a href="#contacto" class="card-link">SOLICITAR SERVICIO →</a>
+          </div>
+        </div>
+
+        <!-- 3. Sistema eléctrico -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80" alt="Sistema eléctrico">
+          <div class="card-body">
+            <h3>SISTEMA ELÉCTRICO</h3>
+            <p>Revisión de batería, fusibles, conexiones y componentes electrónicos para detectar fallas y asegurar el funcionamiento del vehículo.</p>
+            <a href="#contacto" class="card-link">SOLICITAR SERVICIO →</a>
+          </div>
+        </div>
+
+        <!-- 4. Cableado eléctrico -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Cableado eléctrico">
+          <div class="card-body">
+            <h3>CABLEADO ELÉCTRICO</h3>
+            <p>Revisión, reparación e instalación ordenada de cables, conectores, terminales y circuitos eléctricos automotrices.</p>
+            <a href="#contacto" class="card-link">SOLICITAR SERVICIO →</a>
+          </div>
+        </div>
+
+        <!-- 5. Diagnóstico eléctrico -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=800&q=80" alt="Diagnóstico eléctrico">
+          <div class="card-body">
+            <h3>DIAGNÓSTICO ELÉCTRICO</h3>
+            <p>Evaluación precisa de fallas eléctricas y electrónicas con herramientas de diagnóstico para ir directo a la solución.</p>
+            <a href="#contacto" class="card-link">SOLICITAR SERVICIO →</a>
+          </div>
+        </div>
+
+        <!-- 6. Alternadores y arranque -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=800&q=80" alt="Alternadores y arranque">
+          <div class="card-body">
+            <h3>ALTERNADORES Y ARRANQUE</h3>
+            <p>Revisión, mantenimiento y reparación del sistema de carga y motores de arranque para que tu vehículo siempre encienda sin problemas.</p>
+            <a href="#contacto" class="card-link">SOLICITAR SERVICIO →</a>
+          </div>
+        </div>
+
       </div>
     </div>
+  </section>
 
-    <!-- 4. Luces automotrices -->
-    <div class="card">
-      <img src="imagenesluces.webp.png" alt="Luces automotrices">
-      <div class="card-body">
-        <h3>LUCES AUTOMOTRICES</h3>
-        <p>Revisión e instalación de luces, faros, exploradoras y sistemas de iluminación.</p>
-        <a href="#contacto" class="btn-servicio">SOLICITAR SERVICIO →</a>
-      </div>
+  <!-- CONTACTO -->
+  <section id="contacto" class="cta-banner">
+    <div class="container">
+      <span class="section-tag">Atención personalizada</span>
+      <h2>¿NECESITAS REVISAR TU VEHÍCULO?</h2>
+      <p>
+        Escríbenos o visítanos en <strong>Servicio Eléctrico Santander</strong>. Te atendemos con responsabilidad y el respaldo del <strong>Gordo Eléctrico</strong>.
+      </p>
+      <!-- Cambia 573000000000 por el número real de WhatsApp -->
+      <a href="https://wa.me/573000000000?text=Hola%20Servicio%20El%C3%A9ctrico%20Santander,%20necesito%20informaci%C3%B3n%20sobre%20un%20servicio." target="_blank" class="btn-primary">
+        💬 Cotizar por WhatsApp
+      </a>
     </div>
+  </section>
 
-    <!-- 5. Cableado eléctrico -->
-    <div class="card">
-      <img src="imagenescableado.webp.png" alt="Cableado eléctrico">
-      <div class="card-body">
-        <h3>CABLEADO ELÉCTRICO</h3>
-        <p>Revisión, reparación e instalación de conexiones, cables y circuitos eléctricos.</p>
-        <a href="#contacto" class="btn-servicio">SOLICITAR SERVICIO →</a>
-      </div>
-    </div>
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p>© 2026 Servicio Eléctrico Santander — El Gordo Eléctrico. Todos los derechos reservados.</p>
+  </footer>
 
-    <!-- 6. Sistema eléctrico -->
-    <div class="card">
-      <img src="imagenessistema-electrico.webp.png" alt="Sistema eléctrico">
-      <div class="card-body">
-        <h3>SISTEMA ELÉCTRICO</h3>
-        <p>Mantenimiento y revisión de componentes eléctricos, conexiones y sistemas electrónicos del vehículo.</p>
-        <a href="#contacto" class="btn-servicio">SOLICITAR SERVICIO →</a>
-      </div>
-    </div>
-
-    <!-- 7. Instalación de sonidos -->
-    <div class="card">
-      <img src="imagenessonido.webp.png" alt="Instalación de sonidos">
-      <div class="card-body">
-        <h3>INSTALACIÓN DE SONIDOS</h3>
-        <p>Instalación y conexión de radios, parlantes, amplificadores, bajos y sistemas de sonido para vehículos.</p>
-        <a href="#contacto" class="btn-servicio">SOLICITAR SERVICIO →</a>
-      </div>
-    </div>
-
-  </div>
-</section>
+</body>
+</html>
