@@ -1,1303 +1,1397 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080d12">
-  <title>Servicio Eléctrico Santander | El Gordo Eléctrico</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #080d12;
-      --panel: #101820;
-      --green: #b6ed45;
-      --white: #f4f6f2;
-      --muted: #a3adb5;
-      --border: rgba(182,237,69,.18);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
-      color: var(--white);
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
-
-    .container {
-      width: min(1150px, 90%);
-      margin: auto;
-    }
-
-    /* NAVEGACIÓN */
-
-    header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      background: rgba(8,13,18,.94);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .navbar {
-      min-height: 78px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .logo {
-      font-size: 19px;
-      font-weight: 900;
-      color: var(--green);
-      letter-spacing: 1px;
-    }
-
-    .logo span {
-      display: block;
-      color: white;
-      font-size: 10px;
-      letter-spacing: 4px;
-      margin-top: 3px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
-
-    nav a {
-      font-size: 12px;
-      font-weight: 700;
-      color: #d5dce0;
-      transition: .3s;
-    }
-
-    nav a:hover {
-      color: var(--green);
-    }
-
-    .nav-button {
-      background: var(--green);
-      color: #10150b;
-      padding: 12px 17px;
-      border-radius: 5px;
-      font-weight: 900;
-    }
-
-    .menu-toggle {
-      display: none;
-      border: 0;
-      background: transparent;
-      color: var(--green);
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    /* PORTADA */
-
-    .hero {
-      min-height: 750px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      background:
-        linear-gradient(90deg, rgba(5,10,14,.96), rgba(5,10,14,.65), rgba(5,10,14,.3)),
-        url("https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1800&q=90")
-        center/cover no-repeat;
-    }
-
-    .hero-content {
-      padding-top: 90px;
-      max-width: 750px;
-    }
-
-    .eyebrow {
-      color: var(--green);
-      font-weight: 800;
-      font-size: 12px;
-      letter-spacing: 4px;
-      margin-bottom: 22px;
-    }
-
-    .hero h1 {
-      font-size: clamp(40px, 7vw, 76px);
-      font-weight: 900;
-      line-height: 1.08;
-      margin-bottom: 25px;
-    }
-
-    .hero h1 span {
-      color: var(--green);
-    }
-
-    .hero p {
-      max-width: 600px;
-      color: #d2d8dc;
-      line-height: 1.9;
-      font-size: 15px;
-      margin-bottom: 35px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 16px 24px;
-      border-radius: 5px;
-      font-size: 12px;
-      font-weight: 900;
-      transition: .3s;
-      text-align: center;
-    }
-
-    .btn-green {
-      background: var(--green);
-      color: #10150b;
-    }
-
-    .btn-outline {
-      border: 1px solid var(--green);
-      color: var(--green);
-    }
-
-    .btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(182,237,69,.15);
-    }
-
-    /* FRANJA */
-
-    .stats {
-      background: var(--green);
-      color: #10150b;
-      padding: 28px 0;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      text-align: center;
-    }
-
-    .stat strong {
-      font-size: 23px;
-      font-weight: 900;
-      display: block;
-    }
-
-    .stat span {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-
-    /* SECCIONES */
-
-    section {
-      padding: 100px 0;
-    }
-
-    .section-heading {
-      margin-bottom: 45px;
-    }
-
-    .section-heading .eyebrow {
-      margin-bottom: 12px;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(30px, 4vw, 45px);
-      font-weight: 900;
-      line-height: 1.2;
-    }
-
-    .section-heading h2 span {
-      color: var(--green);
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      line-height: 1.8;
-      margin-top: 15px;
-      max-width: 650px;
-      font-size: 14px;
-    }
-
-    /* NOSOTROS */
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 55px;
-      align-items: center;
-    }
-
-    .about-image {
-      height: 440px;
-      overflow: hidden;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .about-image img {
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .about-text h2 {
-      font-size: 37px;
-      font-weight: 900;
-      margin-bottom: 20px;
-    }
-
-    .about-text h2 span {
-      color: var(--green);
-    }
-
-    .about-text p {
-      color: var(--muted);
-      line-height: 1.9;
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
-
-    .check-list {
-      list-style: none;
-      margin: 25px 0;
-    }
-
-    .check-list li {
-      margin-bottom: 14px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .check-list li::before {
-      content: "✓";
-      color: var(--green);
-      margin-right: 12px;
-      font-weight: 900;
-    }
-
-    /* SERVICIOS */
-
-    .services {
-      background: #0c131a;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .service-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      overflow: hidden;
-      transition: .35s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--green);
-      box-shadow: 0 15px 35px rgba(0,0,0,.3);
-    }
-
-    .service-image {
-      height: 220px;
-      overflow: hidden;
-    }
-
-    .service-image img {
-      height: 100%;
-      object-fit: cover;
-      transition: .5s;
-    }
-
-    .service-card:hover .service-image img {
-      transform: scale(1.08);
-    }
-
-    .service-info {
-      padding: 25px;
-    }
-
-    .service-info h3 {
-      font-size: 17px;
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-
-    .service-info p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
-      min-height: 65px;
-      margin-bottom: 20px;
-    }
-
-    .service-link {
-      display: inline-block;
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
-
-    .service-link:hover {
-      color: white;
-    }
-
-    /* ESPECIALIDADES */
-
-    .special-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .special-item {
-      background: var(--panel);
-      padding: 25px;
-      border-left: 3px solid var(--green);
-      border-radius: 5px;
-    }
-
-    .special-item h3 {
-      color: var(--green);
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-
-    .special-item p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    /* PROPIETARIO */
-
-    .owner {
-      background:
-        linear-gradient(rgba(5,10,14,.88), rgba(5,10,14,.92)),
-        url("https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=1600&q=85")
-        center/cover fixed;
-      text-align: center;
-    }
-
-    .owner-content {
-      max-width: 750px;
-      margin: auto;
-    }
-
-    .owner h2 {
-      font-size: clamp(35px, 5vw, 55px);
-      font-weight: 900;
-      margin: 15px 0;
-    }
-
-    .owner h2 span {
-      color: var(--green);
-    }
-
-    .owner p {
-      color: #d1d8dd;
-      font-size: 14px;
-      line-height: 1.9;
-      margin-bottom: 30px;
-    }
-
-    /* GALERÍA */
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
-
-    .gallery-grid img {
-      height: 220px;
-      object-fit: cover;
-      border-radius: 7px;
-      border: 1px solid var(--border);
-      transition: .3s;
-    }
-
-    .gallery-grid img:hover {
-      transform: scale(1.03);
-      border-color: var(--green);
-    }
-
-    /* CITAS */
-
-    .appointment {
-      background: #0c131a;
-    }
-
-    .appointment-grid {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 50px;
-      align-items: start;
-    }
-
-    .appointment-info h2 {
-      font-size: 37px;
-      font-weight: 900;
-      margin-bottom: 20px;
-    }
-
-    .appointment-info h2 span {
-      color: var(--green);
-    }
-
-    .appointment-info p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.9;
-      margin-bottom: 25px;
-    }
-
-    .contact-line {
-      margin: 20px 0;
-      color: #dce2e5;
-      font-size: 13px;
-    }
-
-    .contact-line strong {
-      color: var(--green);
-    }
-
-    .appointment-form {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      padding: 30px;
-      border-radius: 9px;
-    }
-
-    .appointment-form h3 {
-      font-size: 21px;
-      margin-bottom: 25px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .form-group {
-      margin-bottom: 17px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      margin-bottom: 9px;
-      color: #dce2e5;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: #080d12;
-      border: 1px solid #26333e;
-      padding: 14px;
-      color: white;
-      border-radius: 4px;
-      outline: none;
-      font-family: inherit;
-      font-size: 12px;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--green);
-    }
-
-    .form-group select option {
-      background: #101820;
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .form-submit {
-      width: 100%;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      margin-top: 5px;
-    }
-
-    /* CONTACTO */
-
-    .contact-banner {
-      background: var(--green);
-      color: #10150b;
-      padding: 55px 0;
-      text-align: center;
-    }
-
-    .contact-banner h2 {
-      font-size: clamp(25px, 4vw, 38px);
-      font-weight: 900;
-      margin-bottom: 15px;
-    }
-
-    .contact-banner p {
-      font-size: 13px;
-      margin-bottom: 25px;
-    }
-
-    .btn-dark {
-      background: #10150b;
-      color: var(--green);
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 35px 0;
-      background: #05090d;
-      text-align: center;
-    }
-
-    footer h3 {
-      color: var(--green);
-      font-size: 17px;
-      margin-bottom: 10px;
-    }
-
-    footer p {
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.8;
-    }
-
-    /* WHATSAPP FLOTANTE */
-
-    .whatsapp-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      z-index: 999;
-      background: #25d366;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: 900;
-      box-shadow: 0 5px 20px rgba(0,0,0,.4);
-      transition: .3s;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-    }
-
-    /* ANIMACIONES */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(25px);
-      transition: .7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* RESPONSIVE */
-
-    @media(max-width: 900px) {
-      nav {
-        gap: 13px;
-      }
-
-      nav a {
-        font-size: 10px;
-      }
-
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media(max-width: 700px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      nav {
-        display: none;
-        position: absolute;
-        top: 78px;
-        left: 0;
-        width: 100%;
-        background: #080d12;
-        padding: 25px;
-        flex-direction: column;
-        align-items: stretch;
-        border-bottom: 1px solid var(--border);
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      nav a {
-        font-size: 13px;
-        padding: 8px 0;
-      }
-
-      .hero {
-        min-height: 680px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .about-grid,
-      .appointment-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about-image {
-        height: 300px;
-      }
-
-      .services-grid,
-      .special-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .gallery-grid img {
-        height: 150px;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      section {
-        padding: 75px 0;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d12">
+<title>Servicio Eléctrico Santander | El Gordo Eléctrico</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#080d12;
+  --panel:#101820;
+  --green:#b6ed45;
+  --white:#f4f6f2;
+  --muted:#a3adb5;
+  --border:rgba(182,237,69,.2);
+}
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body {
+  font-family:Montserrat,sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  overflow-x:hidden;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+img {
+  display:block;
+  width:100%;
+}
+
+.container {
+  width:min(1150px,90%);
+  margin:auto;
+}
+
+/* NAVEGACIÓN */
+
+header {
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+  background:rgba(8,13,18,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+
+.navbar {
+  min-height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo-link {
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.logo-mark {
+  width:42px;
+  height:42px;
+  border-radius:6px;
+  object-fit:cover;
+  border:1px solid var(--border);
+}
+
+.logo {
+  font-size:17px;
+  font-weight:900;
+  color:var(--green);
+  letter-spacing:1px;
+  line-height:1.1;
+}
+
+.logo span {
+  display:block;
+  color:white;
+  font-size:10px;
+  letter-spacing:4px;
+  margin-top:3px;
+}
+
+nav {
+  display:flex;
+  align-items:center;
+  gap:23px;
+}
+
+nav a {
+  font-size:11px;
+  font-weight:800;
+  color:#d5dce0;
+  transition:.25s;
+}
+
+nav a:hover {
+  color:var(--green);
+}
+
+.nav-cta {
+  background:var(--green);
+  color:#10150b;
+  padding:12px 16px;
+  border-radius:4px;
+}
+
+.menu-toggle {
+  display:none;
+  background:none;
+  border:0;
+  color:var(--green);
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* PORTADA CON TU LOGO */
+
+.hero {
+  min-height:760px;
+  padding:110px 0 65px;
+  display:flex;
+  align-items:end;
+  position:relative;
+  background:
+    linear-gradient(0deg,rgba(5,10,14,.95),rgba(5,10,14,.32) 70%),
+    url("imagenes/portada-logo.webp") center 43%/cover no-repeat;
+}
+
+.hero-content {
+  max-width:700px;
+}
+
+.eyebrow {
+  color:var(--green);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:4px;
+  margin-bottom:15px;
+}
+
+.hero h1 {
+  font-size:clamp(35px,6vw,65px);
+  line-height:1.08;
+  font-weight:900;
+  margin-bottom:18px;
+  text-shadow:0 3px 15px #000;
+}
+
+.hero h1 span {
+  color:var(--green);
+}
+
+.hero p {
+  max-width:620px;
+  color:#e0e5e8;
+  font-size:14px;
+  line-height:1.9;
+  margin-bottom:26px;
+}
+
+.buttons {
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+}
+
+.btn {
+  display:inline-block;
+  padding:15px 22px;
+  border-radius:4px;
+  font-size:11px;
+  font-weight:900;
+  transition:.25s;
+  text-align:center;
+}
+
+.btn-green {
+  background:var(--green);
+  color:#10150b;
+}
+
+.btn-outline {
+  border:1px solid var(--green);
+  color:var(--green);
+}
+
+.btn:hover {
+  transform:translateY(-3px);
+}
+
+/* FRANJA */
+
+.stats {
+  background:var(--green);
+  color:#10150b;
+  padding:25px 0;
+}
+
+.stats-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  text-align:center;
+}
+
+.stat strong {
+  display:block;
+  font-size:20px;
+  font-weight:900;
+}
+
+.stat span {
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+/* SECCIONES */
+
+section {
+  padding:90px 0;
+}
+
+.heading {
+  margin-bottom:40px;
+}
+
+.heading .eyebrow {
+  margin-bottom:10px;
+}
+
+.heading h2 {
+  font-size:clamp(29px,4vw,43px);
+  font-weight:900;
+}
+
+.heading h2 span,
+.about-text h2 span,
+.appointment-info h2 span {
+  color:var(--green);
+}
+
+.heading p {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.9;
+  max-width:680px;
+  margin-top:13px;
+}
+
+/* NOSOTROS / CONÓCENOS */
+
+.about-grid {
+  display:grid;
+  grid-template-columns:1fr 1.15fr;
+  gap:48px;
+  align-items:center;
+}
+
+.about-media {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.about-image {
+  height:360px;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+
+.about-image img {
+  height:100%;
+  object-fit:cover;
+}
+
+.about-thumbs {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.about-thumbs img {
+  height:135px;
+  object-fit:cover;
+  border-radius:6px;
+  border:1px solid var(--border);
+}
+
+.about-text h2 {
+  font-size:clamp(28px,3.6vw,38px);
+  font-weight:900;
+  margin-bottom:18px;
+  line-height:1.15;
+}
+
+.about-text p {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.9;
+  margin-bottom:15px;
+}
+
+.about-highlight {
+  color:var(--white);
+  font-weight:600;
+}
+
+.about-subtitle {
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  margin:20px 0 10px;
+}
+
+.check-list {
+  list-style:none;
+  margin:14px 0 22px;
+}
+
+.check-list li {
+  font-size:12px;
+  font-weight:600;
+  color:#dce2e5;
+  line-height:1.75;
+  margin:10px 0;
+}
+
+.check-list li strong {
+  color:var(--green);
+}
+
+.check-list li:before {
+  content:"✓";
+  color:var(--green);
+  font-weight:900;
+  margin-right:10px;
+}
+
+/* SERVICIOS */
+
+.services {
+  background:#0c131a;
+}
+
+.services-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.service-card {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.service-card:hover {
+  transform:translateY(-7px);
+  border-color:var(--green);
+  box-shadow:0 14px 30px #0005;
+}
+
+.service-image {
+  height:215px;
+  overflow:hidden;
+  background:#17232c;
+}
+
+.service-image img {
+  height:100%;
+  object-fit:cover;
+  transition:.45s;
+}
+
+.service-card:hover .service-image img {
+  transform:scale(1.06);
+}
+
+.service-info {
+  padding:22px;
+}
+
+.service-info h3 {
+  font-size:15px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.service-info p {
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.8;
+  min-height:60px;
+  margin-bottom:17px;
+}
+
+.service-link {
+  color:var(--green);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+/* ESPECIALIDADES */
+
+.special-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.special-item {
+  background:var(--panel);
+  padding:23px;
+  border-left:3px solid var(--green);
+  border-radius:4px;
+}
+
+.special-item h3 {
+  font-size:14px;
+  color:var(--green);
+  margin-bottom:9px;
+}
+
+.special-item p {
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+/* EL GORDO ELÉCTRICO */
+
+.owner {
+  background:
+    linear-gradient(rgba(5,10,14,.88),rgba(5,10,14,.92)),
+    url("imagenes/portada-logo.webp")
+    center/cover;
+  text-align:center;
+}
+
+.owner-content {
+  max-width:760px;
+  margin:auto;
+}
+
+.owner h2 {
+  font-size:clamp(34px,5vw,52px);
+  font-weight:900;
+  margin:15px 0;
+}
+
+.owner h2 span {
+  color:var(--green);
+}
+
+.owner p {
+  font-size:13px;
+  line-height:1.9;
+  color:#d1d8dd;
+  margin-bottom:25px;
+}
+
+/* GALERÍA */
+
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.gallery img {
+  height:210px;
+  object-fit:cover;
+  border-radius:6px;
+  border:1px solid var(--border);
+}
+
+/* AGENDAR CITA */
+
+.appointment {
+  background:#0c131a;
+}
+
+.appointment-grid {
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:45px;
+  align-items:start;
+}
+
+.appointment-info h2 {
+  font-size:35px;
+  font-weight:900;
+  margin:10px 0 17px;
+}
+
+.appointment-info p {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.9;
+  margin-bottom:20px;
+}
+
+.contact-line {
+  font-size:12px;
+  color:#dce2e5;
+  margin:17px 0;
+}
+
+.contact-line strong {
+  color:var(--green);
+}
+
+.appointment-form {
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:27px;
+  border-radius:8px;
+}
+
+.appointment-form h3 {
+  font-size:19px;
+  margin-bottom:22px;
+}
+
+.form-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.form-group {
+  margin-bottom:15px;
+}
+
+.form-group label {
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:8px;
+  color:#dce2e5;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width:100%;
+  background:#080d12;
+  border:1px solid #26333e;
+  padding:13px;
+  color:white;
+  border-radius:4px;
+  outline:none;
+  font-family:inherit;
+  font-size:11px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color:var(--green);
+}
+
+.form-group select option {
+  background:#101820;
+}
+
+.form-group textarea {
+  resize:vertical;
+  min-height:90px;
+}
+
+.form-submit {
+  width:100%;
+  border:0;
+  cursor:pointer;
+  font-family:inherit;
+}
+
+/* CONTACTO */
+
+.contact-banner {
+  background:var(--green);
+  color:#10150b;
+  text-align:center;
+  padding:48px 0;
+}
+
+.contact-banner h2 {
+  font-size:clamp(24px,4vw,36px);
+  font-weight:900;
+  margin-bottom:12px;
+}
+
+.contact-banner p {
+  font-size:12px;
+  margin-bottom:22px;
+}
+
+.btn-dark {
+  background:#10150b;
+  color:var(--green);
+}
+
+/* PIE DE PÁGINA */
+
+footer {
+  background:#05090d;
+  text-align:center;
+  padding:32px 0;
+}
+
+footer h3 {
+  font-size:16px;
+  color:var(--green);
+  margin-bottom:8px;
+}
+
+footer p {
+  font-size:10px;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+/* WHATSAPP FLOTANTE */
+
+.whatsapp-float {
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:999;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#25d366;
+  color:white;
+  font-size:24px;
+  font-weight:900;
+  box-shadow:0 5px 20px #0008;
+}
+
+/* ANIMACIONES */
+
+.reveal {
+  opacity:0;
+  transform:translateY(22px);
+  transition:.7s;
+}
+
+.reveal.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* DISEÑO PARA CELULARES */
+
+@media(max-width:900px) {
+  .services-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  nav {
+    gap:12px;
+  }
+
+  nav a {
+    font-size:9px;
+  }
+}
+
+@media(max-width:700px) {
+  .menu-toggle {
+    display:block;
+  }
+
+  nav {
+    display:none;
+    position:absolute;
+    top:78px;
+    left:0;
+    width:100%;
+    padding:22px;
+    background:#080d12;
+    flex-direction:column;
+    align-items:stretch;
+    border-bottom:1px solid var(--border);
+  }
+
+  nav.active {
+    display:flex;
+  }
+
+  nav a {
+    font-size:12px;
+    padding:8px 0;
+  }
+
+  .hero {
+    min-height:690px;
+    background-position:center center;
+  }
+
+  .stats-grid {
+    grid-template-columns:1fr;
+  }
+
+  .about-grid,
+  .appointment-grid {
+    grid-template-columns:1fr;
+  }
+
+  .about-image {
+    height:260px;
+  }
+
+  .services-grid,
+  .special-grid {
+    grid-template-columns:1fr;
+  }
+
+  .gallery {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .gallery img {
+    height:145px;
+  }
+
+  .form-row {
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  section {
+    padding:70px 0;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVEGACIÓN -->
-  <header>
-    <div class="container navbar">
-      <a href="#inicio" class="logo">
+<!-- MENÚ -->
+<header>
+  <div class="container navbar">
+
+    <a href="#inicio" class="logo-link">
+      <img src="imagenes/portada-logo.webp"
+           alt="Logo Servicio Eléctrico Santander"
+           class="logo-mark">
+      <div class="logo">
         SERVICIO ELÉCTRICO
         <span>SANTANDER</span>
-      </a>
+      </div>
+    </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
 
-      <nav id="navMenu">
-        <a href="#inicio">INICIO</a>
-        <a href="#nosotros">NOSOTROS</a>
-        <a href="#servicios">SERVICIOS</a>
-        <a href="#especialidades">ESPECIALIDADES</a>
-        <a href="#galeria">GALERÍA</a>
-        <a href="#citas" class="nav-button">AGENDAR CITA</a>
-      </nav>
+    <nav id="navMenu">
+      <a href="#inicio">INICIO</a>
+      <a href="#nosotros">CONÓCENOS</a>
+      <a href="#servicios">SERVICIOS</a>
+      <a href="#especialidades">ESPECIALIDADES</a>
+      <a href="#galeria">GALERÍA</a>
+      <a href="#citas" class="nav-cta">AGENDAR CITA</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+<!-- PORTADA -->
+<section class="hero" id="inicio">
+  <div class="container hero-content">
+
+    <div class="eyebrow">
+      ELECTRICIDAD AUTOMOTRIZ · INSTALACIONES · DIAGNÓSTICO
     </div>
-  </header>
 
-  <!-- PORTADA -->
-  <section class="hero" id="inicio">
-    <div class="container">
-      <div class="hero-content reveal">
-        <div class="eyebrow">SERVICIO ELÉCTRICO AUTOMOTRIZ</div>
+    <h1>
+      LA ENERGÍA QUE TU VEHÍCULO
+      <span>NECESITA.</span>
+    </h1>
 
-        <h1>
-          LA ENERGÍA QUE<br>
-          TU VEHÍCULO<br>
-          <span>NECESITA.</span>
-        </h1>
+    <p>
+      Servicio Eléctrico Santander: soluciones eléctricas para tu vehículo,
+      instalación de sonidos, luces y diagnóstico automotriz.
+      Atención cercana con El Gordo Eléctrico.
+    </p>
 
-        <p>
-          En Servicio Eléctrico Santander somos especialistas en diagnóstico,
-          mantenimiento y reparación de sistemas eléctricos automotrices.
-          Calidad, experiencia y compromiso en cada trabajo.
-        </p>
+    <div class="buttons">
+      <a href="#servicios" class="btn btn-green">CONOCE NUESTROS SERVICIOS</a>
+      <a href="#citas" class="btn btn-outline">AGENDA TU CITA</a>
+    </div>
 
-        <div class="buttons">
-          <a href="#servicios" class="btn btn-green">CONOCE NUESTROS SERVICIOS</a>
-          <a href="#citas" class="btn btn-outline">AGENDA TU CITA</a>
-        </div>
+  </div>
+</section>
+
+<!-- FRANJA -->
+<div class="stats">
+  <div class="container stats-grid">
+
+    <div class="stat">
+      <strong>CALIDAD</strong>
+      <span>EN CADA SERVICIO</span>
+    </div>
+
+    <div class="stat">
+      <strong>EXPERIENCIA</strong>
+      <span>EN ELECTRICIDAD AUTOMOTRIZ</span>
+    </div>
+
+    <div class="stat">
+      <strong>COMPROMISO</strong>
+      <span>CON TU VEHÍCULO</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONÓCENOS -->
+<section id="nosotros">
+  <div class="container about-grid">
+
+    <div class="about-media reveal">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=1200&q=85"
+             alt="Diagnóstico y revisión eléctrica automotriz en el taller"
+             loading="lazy">
+      </div>
+      <div class="about-thumbs">
+        <img src="imagenes/portada-logo.webp"
+             alt="Portada y logo de Servicio Eléctrico Santander"
+             loading="lazy">
+        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=900&q=85"
+             alt="Componentes eléctricos y sistema de carga automotriz"
+             loading="lazy">
       </div>
     </div>
-  </section>
 
-  <!-- ESTADÍSTICAS -->
-  <div class="stats">
-    <div class="container stats-grid">
-      <div class="stat">
-        <strong>CALIDAD</strong>
-        <span>EN CADA SERVICIO</span>
-      </div>
+    <div class="about-text reveal">
 
-      <div class="stat">
-        <strong>EXPERIENCIA</strong>
-        <span>EN ELECTRICIDAD AUTOMOTRIZ</span>
-      </div>
+      <div class="eyebrow">CONÓCENOS</div>
 
-      <div class="stat">
-        <strong>COMPROMISO</strong>
-        <span>CON TU VEHÍCULO</span>
-      </div>
+      <h2>
+        ¡CONOCE SERVICIO ELÉCTRICO
+        <span>SANTANDER!</span> ⚡🚗
+      </h2>
+
+      <p>
+        Al frente de nuestro taller está el reconocido <strong>Gordo Eléctrico</strong>,
+        un referente de confianza, experiencia y buen trato cuando se trata de resolver
+        lo que otros no logran encontrar. En <strong>Servicio Eléctrico Santander</strong>
+        somos especialistas en electricidad automotriz y trabajamos cada día
+        comprometidos con el rendimiento, la seguridad y el confort de tu vehículo.
+      </p>
+
+      <p>
+        Sabemos lo importante que es tu carro o herramienta de trabajo, por eso
+        combinamos responsabilidad, dedicación y una atención cercana y personalizada
+        para brindarte diagnósticos certeros y soluciones que realmente duran en
+        sistemas eléctricos, electrónicos y de sonido.
+      </p>
+
+      <div class="about-subtitle">🔥 ¿QUÉ HACEMOS POR TU VEHÍCULO?</div>
+
+      <ul class="check-list">
+        <li>
+          <strong>Diagnóstico eléctrico automotriz:</strong> Ubicamos la falla a la fija,
+          sin rodeos ni adivinanzas, para cuidar tu tiempo y tu bolsillo.
+        </li>
+        <li>
+          <strong>Reparación y mantenimiento:</strong> Dejamos el sistema eléctrico
+          operando al cien por ciento con trabajo limpio y seguro.
+        </li>
+        <li>
+          <strong>Instalación de accesorios y sonidos:</strong> Potenciamos y
+          personalizamos tu vehículo con equipos de audio, luces y accesorios bien
+          instalados.
+        </li>
+        <li>
+          <strong>Atención responsable y personalizada:</strong> Te explicamos claro qué
+          tiene tu auto y te acompañamos en todo el proceso, con el respaldo y la
+          confianza del Gordo Eléctrico.
+        </li>
+      </ul>
+
+      <p class="about-highlight">
+        Si buscas un servicio serio, con sabor a calle y taller de verdad, aquí estamos
+        para ayudarte. ¡Tu vehículo está en buenas manos!
+      </p>
+
+      <a href="#citas" class="btn btn-green">SOLICITAR SERVICIO</a>
+
     </div>
   </div>
+</section>
 
-  <!-- NOSOTROS -->
-  <section id="nosotros">
-    <div class="container about-grid">
+<!-- SERVICIOS -->
+<section class="services" id="servicios">
+  <div class="container">
 
-      <div class="about-image reveal">
-        <img
-          src="https://images.unsplash.com/photo-1632823471565-1ecdf5c4f4c2?auto=format&fit=crop&w=1000&q=85"
-          alt="Taller de servicio automotriz"
-          loading="lazy">
+    <div class="heading reveal">
+      <div class="eyebrow">LO QUE HACEMOS</div>
+      <h2>NUESTROS <span>SERVICIOS</span></h2>
+      <p>
+        Soluciones para mantener el sistema eléctrico de tu vehículo
+        en excelentes condiciones y personalizarlo con los accesorios
+        que necesitas.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- SONIDO -->
+      <article class="service-card reveal">
+        <div class="service-image">
+          <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=900&q=85"
+               alt="Instalación de sonido y parlantes automotrices"
+               loading="lazy">
+        </div>
+
+        <div class="service-info">
+          <h3>INSTALACIÓN DE SONIDOS</h3>
+          <p>
+            Instalación y conexión de radios, pantallas, parlantes,
+            amplificadores, bajos y sistemas de sonido para vehículos.
+          </p>
+          <a class="service-link"
+             href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20instalación%20de%20sonidos.">
+            SOLICITAR SERVICIO →
+          </a>
+        </div>
+      </article>
+
+      <!-- LUCES -->
+      <article class="service-card reveal">
+        <div class="service-image">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=85"
+               alt="Luces LED y faros automotrices"
+               loading="lazy">
+        </div>
+
+        <div class="service-info">
+          <h3>LUCES AUTOMOTRICES</h3>
+          <p>
+            Instalación y revisión de luces LED, faros, exploradoras
+            y sistemas de iluminación para tu vehículo.
+          </p>
+          <a class="service-link"
+             href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20luces%20automotrices.">
+            SOLICITAR SERVICIO →
+          </a>
+        </div>
+      </article>
+
+      <!-- SISTEMA ELÉCTRICO -->
+      <article class="service-card reveal">
+        <div class="service-image">
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=85"
+               alt="Revisión del sistema eléctrico automotriz"
+               loading="lazy">
+        </div>
+
+        <div class="service-info">
+          <h3>SISTEMA ELÉCTRICO</h3>
+          <p>
+            Revisión de batería, conexiones y componentes eléctricos
+            para detectar fallas y mantener el funcionamiento del vehículo.
+          </p>
+          <a class="service-link"
+             href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20sistema%20eléctrico.">
+            SOLICITAR SERVICIO →
+          </a>
+        </div>
+      </article>
+
+      <!-- CABLEADO -->
+      <article class="service-card reveal">
+        <div class="service-image">
+          <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=900&q=85"
+               alt="Reparación y revisión de cableado eléctrico"
+               loading="lazy">
+        </div>
+
+        <div class="service-info">
+          <h3>CABLEADO ELÉCTRICO</h3>
+          <p>
+            Revisión, reparación e instalación de cables, conectores,
+            terminales y circuitos eléctricos del vehículo.
+          </p>
+          <a class="service-link"
+             href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20cableado%20eléctrico.">
+            SOLICITAR SERVICIO →
+          </a>
+        </div>
+      </article>
+
+      <!-- DIAGNÓSTICO -->
+      <article class="service-card reveal">
+        <div class="service-image">
+          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=900&q=85"
+               alt="Diagnóstico electrónico y eléctrico automotriz"
+               loading="lazy">
+        </div>
+
+        <div class="service-info">
+          <h3>DIAGNÓSTICO</h3>
+          <p>
+            Evaluación de fallas eléctricas y electrónicas con
+            herramientas de diagnóstico para orientar la reparación.
+          </p>
+          <a class="service-link"
+             href="https://wa.me/573213025418?text=Hola,%20quiero%20agendar%20un%20diagnóstico%20para%20mi%20vehículo.">
+            SOLICITAR SERVICIO →
+          </a>
+        </div>
+      </article>
+
+      <!-- ALTERNADORES Y ARRANQUE -->
+      <article class="service-card reveal">
+        <div class="service-image">
+          <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=900&q=85"
+               alt="Servicio de alternadores y sistema de arranque"
+               loading="lazy">
+        </div>
+
+        <div class="service-info">
+          <h3>ALTERNADORES Y ARRANQUE</h3>
+          <p>
+            Revisión del sistema de carga y arranque para identificar
+            problemas al encender o mantener cargada la batería.
+          </p>
+          <a class="service-link"
+             href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20alternadores%20y%20arranque.">
+            SOLICITAR SERVICIO →
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section id="especialidades">
+  <div class="container">
+
+    <div class="heading reveal">
+      <div class="eyebrow">NUESTRAS CAPACIDADES</div>
+      <h2>¿POR QUÉ <span>ELEGIRNOS?</span></h2>
+      <p>
+        Nos esforzamos por ofrecer soluciones prácticas y atención
+        personalizada para cada vehículo.
+      </p>
+    </div>
+
+    <div class="special-grid">
+
+      <div class="special-item reveal">
+        <h3>01. DIAGNÓSTICO</h3>
+        <p>Buscamos el origen de las fallas para orientar una solución adecuada.</p>
       </div>
 
-      <div class="about-text reveal">
-        <div class="eyebrow">CONÓCENOS</div>
+      <div class="special-item reveal">
+        <h3>02. ELECTRICIDAD AUTOMOTRIZ</h3>
+        <p>Revisión de conexiones, circuitos y componentes eléctricos.</p>
+      </div>
 
-        <h2>
-          SERVICIO ELÉCTRICO<br>
-          <span>SANTANDER</span>
-        </h2>
+      <div class="special-item reveal">
+        <h3>03. INSTALACIONES</h3>
+        <p>Instalación de accesorios, iluminación y equipos de sonido.</p>
+      </div>
 
-        <p>
-          Somos un taller especializado en electricidad automotriz,
-          dedicado a brindar soluciones confiables para el correcto
-          funcionamiento de tu vehículo.
-        </p>
-
-        <p>
-          Trabajamos con responsabilidad, dedicación y atención personalizada,
-          ofreciendo diagnósticos y soluciones para diferentes sistemas
-          eléctricos y electrónicos.
-        </p>
-
-        <ul class="check-list">
-          <li>Diagnóstico eléctrico automotriz.</li>
-          <li>Reparación y mantenimiento.</li>
-          <li>Instalación de accesorios y sonidos.</li>
-          <li>Atención responsable y personalizada.</li>
-        </ul>
-
-        <a href="#citas" class="btn btn-green">SOLICITAR SERVICIO</a>
+      <div class="special-item reveal">
+        <h3>04. COMPROMISO</h3>
+        <p>Atención cercana y responsable para cada cliente.</p>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SERVICIOS -->
-  <section class="services" id="servicios">
-    <div class="container">
+<!-- EL GORDO ELÉCTRICO -->
+<section class="owner">
+  <div class="container owner-content reveal">
 
-      <div class="section-heading reveal">
-        <div class="eyebrow">LO QUE HACEMOS</div>
-        <h2>NUESTROS <span>SERVICIOS</span></h2>
-        <p>
-          Contamos con diferentes soluciones para mantener el sistema
-          eléctrico de tu vehículo en excelentes condiciones.
-        </p>
-      </div>
+    <div class="eyebrow">AL FRENTE DEL TALLER</div>
 
-      <div class="services-grid">
+    <h2>EL GORDO <span>ELÉCTRICO</span></h2>
 
-        <!-- SERVICIO 1 -->
-        <article class="service-card reveal">
-          <div class="service-image">
-            <img
-              src="https://images.unsplash.com/photo-1597766353939-dc4e9d0f0d1c?auto=format&fit=crop&w=900&q=85"
-              alt="Diagnóstico eléctrico automotriz"
-              loading="lazy">
-          </div>
-          <div class="service-info">
-            <h3>DIAGNÓSTICO ELÉCTRICO</h3>
-            <p>
-              Identificamos fallas eléctricas y electrónicas para encontrar
-              soluciones adecuadas para tu vehículo.
-            </p>
-            <a class="service-link"
-               href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20diagnóstico%20eléctrico.">
-              SOLICITAR SERVICIO →
-            </a>
-          </div>
-        </article>
+    <p>
+      Detrás de Servicio Eléctrico Santander está El Gordo Eléctrico,
+      comprometido con brindar soluciones, atención de calidad y un
+      servicio confiable para cada vehículo que llega al taller.
+    </p>
 
-        <!-- SERVICIO 2 -->
-        <article class="service-card reveal">
-          <div class="service-image">
-            <img
-              src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=900&q=85"
-              alt="Revisión de alternador"
-              loading="lazy">
-          </div>
-          <div class="service-info">
-            <h3>ALTERNADORES</h3>
-            <p>
-              Revisión, mantenimiento y reparación de alternadores
-              para garantizar una correcta carga de batería.
-            </p>
-            <a class="service-link"
-               href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20alternadores.">
-              SOLICITAR SERVICIO →
-            </a>
-          </div>
-        </article>
+    <a href="#citas" class="btn btn-green">AGENDA TU VISITA</a>
 
-        <!-- SERVICIO 3 -->
-        <article class="service-card reveal">
-          <div class="service-image">
-            <img
-              src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&w=900&q=85"
-              alt="Reparación automotriz"
-              loading="lazy">
-          </div>
-          <div class="service-info">
-            <h3>MOTORES DE ARRANQUE</h3>
-            <p>
-              Diagnóstico y reparación del sistema de arranque
-              para que tu vehículo encienda correctamente.
-            </p>
-            <a class="service-link"
-               href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20motores%20de%20arranque.">
-              SOLICITAR SERVICIO →
-            </a>
-          </div>
-        </article>
+  </div>
+</section>
 
-        <!-- SERVICIO 4 -->
-        <article class="service-card reveal">
-          <div class="service-image">
-            <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=85"
-              alt="Luces automotrices"
-              loading="lazy">
-          </div>
-          <div class="service-info">
-            <h3>LUCES AUTOMOTRICES</h3>
-            <p>
-              Revisión e instalación de luces, faros, exploradoras
-              y sistemas de iluminación.
-            </p>
-            <a class="service-link"
-               href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20luces%20automotrices.">
-              SOLICITAR SERVICIO →
-            </a>
-          </div>
-        </article>
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="container">
 
-        <!-- SERVICIO 5 -->
-        <article class="service-card reveal">
-          <div class="service-image">
-            <img
-              src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=900&q=85"
-              alt="Cableado y conexiones eléctricas"
-              loading="lazy">
-          </div>
-          <div class="service-info">
-            <h3>CABLEADO ELÉCTRICO</h3>
-            <p>
-              Revisión, reparación e instalación de conexiones,
-              cables y circuitos eléctricos.
-            </p>
-            <a class="service-link"
-               href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20cableado%20eléctrico.">
-              SOLICITAR SERVICIO →
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICIO 6 -->
-        <article class="service-card reveal">
-          <div class="service-image">
-            <img
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
-              alt="Sistema eléctrico y electrónico"
-              loading="lazy">
-          </div>
-          <div class="service-info">
-            <h3>SISTEMA ELÉCTRICO</h3>
-            <p>
-              Mantenimiento y revisión de componentes eléctricos,
-              conexiones y sistemas electrónicos del vehículo.
-            </p>
-            <a class="service-link"
-               href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20sistema%20eléctrico.">
-              SOLICITAR SERVICIO →
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICIO 7: INSTALACIÓN DE SONIDOS -->
-        <article class="service-card reveal">
-          <div class="service-image">
-            <img
-              src="https://images.unsplash.com/photo-1507878866276-a947ef722fee?auto=format&fit=crop&w=900&q=85"
-              alt="Instalación de equipos de sonido"
-              loading="lazy">
-          </div>
-          <div class="service-info">
-            <h3>INSTALACIÓN DE SONIDOS</h3>
-            <p>
-              Instalación y conexión de radios, parlantes, amplificadores,
-              bajos y sistemas de sonido para vehículos.
-            </p>
-            <a class="service-link"
-               href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20instalación%20de%20sonidos%20para%20mi%20vehículo.">
-              SOLICITAR SERVICIO →
-            </a>
-          </div>
-        </article>
-
-      </div>
+    <div class="heading reveal">
+      <div class="eyebrow">NUESTRO TRABAJO</div>
+      <h2>GALERÍA DEL <span>TALLER</span></h2>
+      <p>
+        Imágenes de los servicios y trabajos que realizamos
+        en electricidad automotriz.
+      </p>
     </div>
-  </section>
 
-  <!-- ESPECIALIDADES -->
-  <section id="especialidades">
-    <div class="container">
+    <div class="gallery reveal">
 
-      <div class="section-heading reveal">
-        <div class="eyebrow">NUESTRAS CAPACIDADES</div>
-        <h2>¿POR QUÉ <span>ELEGIRNOS?</span></h2>
-        <p>
-          Nos esforzamos por ofrecer un servicio confiable,
-          soluciones prácticas y atención personalizada.
-        </p>
-      </div>
+      <img src="imagenes/portada-logo.webp"
+           alt="Portada y logo Servicio Eléctrico Santander"
+           loading="lazy">
 
-      <div class="special-grid">
+      <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=900&q=85"
+           alt="Instalación de sonido automotriz"
+           loading="lazy">
 
-        <div class="special-item reveal">
-          <h3>01. DIAGNÓSTICO</h3>
-          <p>Buscamos el origen de las fallas para brindar una solución adecuada.</p>
-        </div>
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=85"
+           alt="Iluminación y luces automotrices"
+           loading="lazy">
 
-        <div class="special-item reveal">
-          <h3>02. EXPERIENCIA</h3>
-          <p>Conocimiento y dedicación en diferentes sistemas eléctricos automotrices.</p>
-        </div>
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=85"
+           alt="Revisión de sistema eléctrico"
+           loading="lazy">
 
-        <div class="special-item reveal">
-          <h3>03. INSTALACIONES</h3>
-          <p>Instalación de accesorios, iluminación y equipos de sonido.</p>
-        </div>
+      <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=900&q=85"
+           alt="Cableado y conexiones eléctricas"
+           loading="lazy">
 
-        <div class="special-item reveal">
-          <h3>04. COMPROMISO</h3>
-          <p>Atención responsable y cercana para cada cliente.</p>
-        </div>
+      <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=900&q=85"
+           alt="Sistema de carga y arranque"
+           loading="lazy">
 
-      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROPIETARIO -->
-  <section class="owner">
-    <div class="container">
-      <div class="owner-content reveal">
-        <div class="eyebrow">AL FRENTE DEL TALLER</div>
-        <h2>EL GORDO <span>ELÉCTRICO</span></h2>
-        <p>
-          Detrás de Servicio Eléctrico Santander está El Gordo Eléctrico,
-          comprometido con brindar soluciones, atención de calidad
-          y un servicio confiable para cada vehículo que llega al taller.
-        </p>
-        <a href="#citas" class="btn btn-green">AGENDA TU VISITA</a>
-      </div>
-    </div>
-  </section>
+<!-- AGENDAR CITA -->
+<section class="appointment" id="citas">
+  <div class="container appointment-grid">
 
-  <!-- GALERÍA -->
-  <section id="galeria">
-    <div class="container">
+    <div class="appointment-info reveal">
 
-      <div class="section-heading reveal">
-        <div class="eyebrow">NUESTRO TRABAJO</div>
-        <h2>GALERÍA DEL <span>TALLER</span></h2>
-        <p>
-          Conoce algunas imágenes relacionadas con el trabajo
-          automotriz y los servicios que ofrecemos.
-        </p>
+      <div class="eyebrow">ESTAMOS PARA AYUDARTE</div>
+
+      <h2>AGENDA TU <span>CITA</span></h2>
+
+      <p>
+        Completa el formulario y envíanos tu solicitud directamente
+        por WhatsApp. El taller se comunicará contigo para confirmar
+        la disponibilidad.
+      </p>
+
+      <div class="contact-line">
+        <strong>WHATSAPP:</strong> 321 302 5418
       </div>
 
-      <div class="gallery-grid reveal">
-        <img
-          src="https://static.wixstatic.com/media/10efc5_6eb997f5e6f24a13a7fbb48bb0206af7~mv2.webp/v1/fill/w_980%2Ch_980%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/Mechanic%20performing%20engine%20repair%20and%20diagnostics%20under%20the%20hood%20in%20a%20professional%20auto%20sh.webp"
-          alt="Trabajo de mecánica automotriz" loading="lazy">
+      <div class="contact-line">
+        <strong>TALLER:</strong> Servicio Eléctrico Santander
+      </div>
 
-        <img
-          src="https://cdn.raw2k.co.uk/app/public/media/738/c/how-to-test-salvage-car-parts-before-reselling-them-567.jpg"
-          alt="Componentes automotrices" loading="lazy">
-
-        <img
-          src="https://static.wixstatic.com/media/7d0580_ee224f09033443afb5db83bf689428d4~mv2.jpg/v1/fill/w_980%2Ch_654%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/7d0580_ee224f09033443afb5db83bf689428d4~mv2.jpg"
-          alt="Servicio automotriz" loading="lazy">
-
-        <img
-          src="https://zamudiogarage.com/images/servicios/escaneo-por-scanner.webp"
-          alt="Escaneo automotriz" loading="lazy">
+      <div class="contact-line">
+        <strong>RESPONSABLE:</strong> El Gordo Eléctrico
       </div>
 
     </div>
-  </section>
 
-  <!-- AGENDAR CITA -->
-  <section class="appointment" id="citas">
-    <div class="container appointment-grid">
+    <form class="appointment-form reveal" id="appointmentForm">
 
-      <div class="appointment-info reveal">
-        <div class="eyebrow">ESTAMOS PARA AYUDARTE</div>
+      <h3>FORMULARIO DE CITAS</h3>
 
-        <h2>AGENDA TU <span>CITA</span></h2>
+      <div class="form-row">
 
-        <p>
-          ¿Tu vehículo presenta una falla eléctrica o necesitas
-          instalar un equipo de sonido? Completa el formulario
-          y envíanos tu solicitud directamente por WhatsApp.
-        </p>
-
-        <div class="contact-line">
-          <strong>WHATSAPP:</strong> 321 302 5418
-        </div>
-
-        <div class="contact-line">
-          <strong>TALLER:</strong> Servicio Eléctrico Santander
-        </div>
-
-        <div class="contact-line">
-          <strong>RESPONSABLE:</strong> El Gordo Eléctrico
-        </div>
-      </div>
-
-      <form class="appointment-form reveal" id="appointmentForm">
-
-        <h3>FORMULARIO DE CITAS</h3>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nombre">NOMBRE COMPLETO</label>
-            <input type="text" id="nombre" placeholder="Tu nombre" required>
-          </div>
-
-          <div class="form-group">
-            <label for="telefono">TELÉFONO</label>
-            <input type="tel" id="telefono" placeholder="Tu número" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="vehiculo">VEHÍCULO</label>
-            <input type="text" id="vehiculo" placeholder="Marca y modelo" required>
-          </div>
-
-          <div class="form-group">
-            <label for="fecha">FECHA DE PREFERENCIA</label>
-            <input type="date" id="fecha" required>
-          </div>
+        <div class="form-group">
+          <label for="nombre">NOMBRE COMPLETO</label>
+          <input id="nombre" type="text" placeholder="Tu nombre" required>
         </div>
 
         <div class="form-group">
-          <label for="servicio">SERVICIO QUE NECESITAS</label>
-          <select id="servicio" required>
-            <option value="">Selecciona un servicio</option>
-            <option>Diagnóstico eléctrico</option>
-            <option>Alternadores</option>
-            <option>Motores de arranque</option>
-            <option>Luces automotrices</option>
-            <option>Cableado eléctrico</option>
-            <option>Sistema eléctrico</option>
-            <option>Instalación de sonidos</option>
-            <option>Otro servicio</option>
-          </select>
+          <label for="telefono">TELÉFONO</label>
+          <input id="telefono" type="tel" placeholder="Tu número" required>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+          <label for="vehiculo">VEHÍCULO</label>
+          <input id="vehiculo" type="text" placeholder="Marca y modelo" required>
         </div>
 
         <div class="form-group">
-          <label for="mensaje">DESCRIBE EL PROBLEMA O SERVICIO</label>
-          <textarea id="mensaje" placeholder="Cuéntanos qué necesita tu vehículo..."></textarea>
+          <label for="fecha">FECHA DE PREFERENCIA</label>
+          <input id="fecha" type="date" required>
         </div>
 
-        <button type="submit" class="btn btn-green form-submit">
-          ENVIAR SOLICITUD POR WHATSAPP
-        </button>
+      </div>
 
-      </form>
+      <div class="form-group">
+        <label for="servicio">SERVICIO QUE NECESITAS</label>
 
-    </div>
-  </section>
+        <select id="servicio" required>
+          <option value="">Selecciona un servicio</option>
+          <option>Instalación de sonidos</option>
+          <option>Luces automotrices</option>
+          <option>Sistema eléctrico</option>
+          <option>Cableado eléctrico</option>
+          <option>Diagnóstico</option>
+          <option>Alternadores y arranque</option>
+          <option>Otro servicio</option>
+        </select>
+      </div>
 
-  <!-- CONTACTO -->
-  <div class="contact-banner">
-    <div class="container">
-      <h2>¿TU VEHÍCULO NECESITA ATENCIÓN?</h2>
-      <p>Comunícate con nosotros y solicita información sobre nuestros servicios.</p>
+      <div class="form-group">
+        <label for="mensaje">DESCRIBE EL SERVICIO</label>
+        <textarea id="mensaje" placeholder="Cuéntanos qué necesita tu vehículo..."></textarea>
+      </div>
 
-      <a
-        href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20los%20servicios%20del%20taller."
-        target="_blank"
-        rel="noopener"
-        class="btn btn-dark">
-        HABLAR POR WHATSAPP
-      </a>
-    </div>
+      <button type="submit" class="btn btn-green form-submit">
+        ENVIAR SOLICITUD POR WHATSAPP
+      </button>
+
+    </form>
+
   </div>
+</section>
 
-  <!-- PIE DE PÁGINA -->
-  <footer>
-    <div class="container">
-      <h3>SERVICIO ELÉCTRICO SANTANDER</h3>
-      <p>El Gordo Eléctrico</p>
-      <p>Especialistas en electricidad automotriz e instalación de sonidos.</p>
-      <p>© 2026 Servicio Eléctrico Santander. Todos los derechos reservados.</p>
-    </div>
-  </footer>
+<!-- CONTACTO -->
+<div class="contact-banner">
+  <div class="container">
 
-  <!-- BOTÓN WHATSAPP FLOTANTE -->
-  <a
-    href="https://wa.me/573213025418?text=Hola,%20quiero%20comunicarme%20con%20Servicio%20Eléctrico%20Santander."
-    class="whatsapp-float"
-    target="_blank"
-    rel="noopener"
-    aria-label="Contactar por WhatsApp">
-    W
-  </a>
+    <h2>¿TU VEHÍCULO NECESITA ATENCIÓN?</h2>
 
-  <script>
-    // MENÚ PARA CELULARES
-    const menuToggle = document.getElementById("menuToggle");
-    const navMenu = document.getElementById("navMenu");
+    <p>
+      Comunícate con nosotros y solicita información sobre nuestros servicios.
+    </p>
 
-    menuToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-      menuToggle.textContent =
-        navMenu.classList.contains("active") ? "✕" : "☰";
-    });
+    <a class="btn btn-dark"
+       target="_blank"
+       rel="noopener"
+       href="https://wa.me/573213025418?text=Hola,%20quiero%20información%20sobre%20los%20servicios%20del%20taller.">
+      HABLAR POR WHATSAPP
+    </a>
 
-    document.querySelectorAll("#navMenu a").forEach(link => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("active");
-        menuToggle.textContent = "☰";
-      });
-    });
+  </div>
+</div>
 
-    // FORMULARIO DE CITAS POR WHATSAPP
-    const appointmentForm = document.getElementById("appointmentForm");
+</main>
 
-    appointmentForm.addEventListener("submit", function(event) {
-      event.preventDefault();
+<!-- PIE DE PÁGINA -->
+<footer>
+  <div class="container">
 
-      const nombre = document.getElementById("nombre").value.trim();
-      const telefono = document.getElementById("telefono").value.trim();
-      const vehiculo = document.getElementById("vehiculo").value.trim();
-      const fecha = document.getElementById("fecha").value;
-      const servicio = document.getElementById("servicio").value;
-      const mensaje = document.getElementById("mensaje").value.trim();
+    <h3>SERVICIO ELÉCTRICO SANTANDER</h3>
 
-      const texto =
-        "¡Hola, Servicio Eléctrico Santander! Quiero solicitar una cita.%0A%0A" +
-        "*Nombre:* " + encodeURIComponent(nombre) + "%0A" +
-        "*Teléfono:* " + encodeURIComponent(telefono) + "%0A" +
-        "*Vehículo:* " + encodeURIComponent(vehiculo) + "%0A" +
-        "*Fecha de preferencia:* " + encodeURIComponent(fecha) + "%0A" +
-        "*Servicio:* " + encodeURIComponent(servicio) + "%0A" +
-        "*Descripción:* " + encodeURIComponent(mensaje);
+    <p>El Gordo Eléctrico</p>
 
-      const whatsappURL = "https://wa.me/573213025418?text=" + texto;
+    <p>
+      Electricidad automotriz · Diagnóstico · Instalación de sonidos
+    </p>
 
-      window.open(whatsappURL, "_blank");
-    });
+    <p>
+      © 2026 Servicio Eléctrico Santander. Todos los derechos reservados.
+    </p>
 
-    // ANIMACIONES AL DESPLAZARSE
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
+  </div>
+</footer>
 
-    document.querySelectorAll(".reveal").forEach(element => {
-      observer.observe(element);
-    });
+<!-- BOTÓN WHATSAPP -->
+<a class="whatsapp-float"
+   href="https://wa.me/573213025418?text=Hola,%20quiero%20comunicarme%20con%20Servicio%20Eléctrico%20Santander."
+   target="_blank"
+   rel="noopener"
+   aria-label="WhatsApp">
+  W
+</a>
 
-    // EVITAR SELECCIONAR FECHAS PASADAS
-    const dateInput = document.getElementById("fecha");
-    const today = new Date();
-    const localDate = new Date(
-      today.getTime() - today.getTimezoneOffset() * 60000
-    ).toISOString().split("T")[0];
+<script>
 
-    dateInput.min = localDate;
-  </script>
+// MENÚ PARA CELULARES
+
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
+
+  menuToggle.textContent =
+    navMenu.classList.contains("active") ? "✕" : "☰";
+});
+
+document.querySelectorAll("#navMenu a").forEach(a => {
+  a.addEventListener("click", () => {
+    navMenu.classList.remove("active");
+    menuToggle.textContent = "☰";
+  });
+});
+
+// FORMULARIO DE CITAS POR WHATSAPP
+
+document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const get = id => document.getElementById(id).value.trim();
+
+  const data = {
+    "Nombre": get("nombre"),
+    "Teléfono": get("telefono"),
+    "Vehículo": get("vehiculo"),
+    "Fecha de preferencia": get("fecha"),
+    "Servicio": get("servicio"),
+    "Descripción": get("mensaje")
+  };
+
+  const message =
+    "¡Hola, Servicio Eléctrico Santander! Quiero solicitar una cita.\n\n" +
+    Object.entries(data)
+      .map(([k,v]) => `*${k}:* ${v || "No especificado"}`)
+      .join("\n");
+
+  window.open(
+    "https://wa.me/573213025418?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+
+});
+
+// EVITAR FECHAS PASADAS
+
+const today = new Date();
+
+document.getElementById("fecha").min =
+  new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+    .toISOString()
+    .split("T")[0];
+
+// ANIMACIONES
+
+const observer = new IntersectionObserver(entries => {
+
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+
+  });
+
+}, {threshold:.12});
+
+document.querySelectorAll(".reveal").forEach(el => {
+  observer.observe(el);
+});
+
+</script>
 
 </body>
 </html>
